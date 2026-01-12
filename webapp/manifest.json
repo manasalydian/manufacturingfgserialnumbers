@@ -1,0 +1,199 @@
+{
+  "_version": "1.73.1",
+  "sap.app": {
+    "id": "serial",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.19.5",
+      "toolsId": "8ce46cf4-1e5b-46fc-8d9a-bc907da50bfc"
+    },
+    "dataSources": {
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      },
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZMFG_SERIALIZATION_APP_V2",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZMFG_SERIALIZATION_APP_V2_VAN",
+            "annotation"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZMFG_SERIALIZATION_APP_V2_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZMFG_SERIALIZATION_APP_V2_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/ZMFG_SERIALIZATION_APP_V2_VAN.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zso_serial-manage": {
+          "semanticObject": "zso_serial",
+          "action": "manage",
+          "title": "{{zso_serial-manage.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.136.9",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "serial.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ZICDS_EWM_9001_P01_V1List",
+          "target": "ZICDS_EWM_9001_P01_V1List"
+        },
+        {
+          "pattern": "ZICDS_EWM_9001_P01_V1({key}):?query:",
+          "name": "ZICDS_EWM_9001_P01_V1ObjectPage",
+          "target": "ZICDS_EWM_9001_P01_V1ObjectPage"
+        },
+        {
+          "pattern": "ZICDS_EWM_9001_P01_V1({key})/_SplitItem({key2}):?query:",
+          "name": "ZICDS_EWM_9001_P02_V1ObjectPage",
+          "target": "ZICDS_EWM_9001_P02_V1ObjectPage"
+        }
+      ],
+      "targets": {
+        "ZICDS_EWM_9001_P01_V1List": {
+          "type": "Component",
+          "id": "ZICDS_EWM_9001_P01_V1List",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/ZICDS_EWM_9001_P01_V1",
+              "variantManagement": "Page",
+              "navigation": {
+                "ZICDS_EWM_9001_P01_V1": {
+                  "detail": {
+                    "route": "ZICDS_EWM_9001_P01_V1ObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "GridTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ZICDS_EWM_9001_P01_V1ObjectPage": {
+          "type": "Component",
+          "id": "ZICDS_EWM_9001_P01_V1ObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZICDS_EWM_9001_P01_V1",
+              "navigation": {
+                "_SplitItem": {
+                  "detail": {
+                    "route": "ZICDS_EWM_9001_P02_V1ObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ZICDS_EWM_9001_P02_V1ObjectPage": {
+          "type": "Component",
+          "id": "ZICDS_EWM_9001_P02_V1ObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/ZICDS_EWM_9001_P01_V1/_SplitItem"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "serial"
+  }
+}
